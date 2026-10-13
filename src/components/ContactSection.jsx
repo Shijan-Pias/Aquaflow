@@ -249,6 +249,7 @@ export const ContactSection = ({ addToRefs }) => {
                       id="name"
                       type="text"
                       name="name"
+                      autoComplete="name"
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="e.g. John Doe"
@@ -267,10 +268,12 @@ export const ContactSection = ({ addToRefs }) => {
                     <input
                       id="phone"
                       type="tel"
+                      inputMode="tel"
                       name="phone"
+                      autoComplete="tel"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="e.g. +880 1234-567890"
+                      placeholder="e.g. +1 800-123-4567"
                       className="form-input"
                     />
                   </div>
@@ -287,7 +290,9 @@ export const ContactSection = ({ addToRefs }) => {
                   <input
                     id="email"
                     type="email"
+                    inputMode="email"
                     name="email"
+                    autoComplete="email"
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="e.g. name@example.com"
@@ -347,3 +352,5 @@ export const ContactSection = ({ addToRefs }) => {
     </section>
   );
 };
+
+export default ContactSection;

@@ -2,6 +2,31 @@
 // Easily swap images, text, and contact information here.
 
 export const siteData = {
+  // SEO & SITE METADATA
+  meta: {
+    title: "AquaFlow | 24/7 Emergency Plumbing & HVAC Services",
+    description: "Licensed local emergency plumbing and HVAC repair experts. 24/7 rapid response, upfront pricing, leak detection, AC repair, and water heater replacements.",
+    canonicalUrl: "https://aquaflow-chi.vercel.app/",
+    siteUrl: "https://aquaflow-chi.vercel.app",
+    ogImage: "/og-image.jpg",
+    businessName: "AquaFlow Plumbing & HVAC",
+    businessType: "Plumber",
+    themeColor: "#0B1F3A",
+    openingHours: "Mo-Su 00:00-23:59",
+    areaServed: [
+      "USA",
+      "Canada",
+      "UK",
+      "Australia",
+      "New Zealand",
+      "UAE",
+      "Saudi Arabia",
+      "Qatar"
+    ],
+    ratingValue: "4.9",
+    reviewCount: "2000"
+  },
+
   // HEADER CONFIGURATION
   header: {
     brandName: "AquaFlow",
