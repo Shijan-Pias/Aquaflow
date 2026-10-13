@@ -2,41 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import { siteData } from './data/siteData';
 import { ContactSection } from './components/ContactSection';
 
-const Counter = ({ end, duration = 2000, suffix = "" }) => {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  
-  useEffect(() => {
-    let startTime = null;
-    let hasStarted = false;
-    
-    const animate = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const progress = timestamp - startTime;
-      const percentage = Math.min(progress / duration, 1);
-      
-      // Easing out cubic
-      const easeOut = 1 - Math.pow(1 - percentage, 3);
-      setCount(Math.floor(easeOut * end));
-      
-      if (percentage < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !hasStarted) {
-        hasStarted = true;
-        requestAnimationFrame(animate);
-      }
-    }, { threshold: 0.5 });
-    
-    if (ref.current) observer.observe(ref.current);
-    
-    return () => observer.disconnect();
-  }, [end, duration]);
-  
-  return <h3 ref={ref}>{count}{suffix}</h3>;
+const Counter = ({ end, suffix = "" }) => {
+  return <h3>{typeof end === 'number' ? end.toLocaleString() : end}{suffix}</h3>;
 };
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -168,19 +135,34 @@ function App() {
           </div>
         </section>
 
-        {/* MARQUEE */}
-        <section className="marquee-section">
-          <div className="marquee-content">
-            <span className="marquee-item">Carrier Authorized</span>
-            <span className="marquee-item">Rheem Pro Partner</span>
-            <span className="marquee-item">Lennox Premier</span>
-            <span className="marquee-item">Bosch Certified</span>
-            <span className="marquee-item">Trane Comfort Specialist</span>
-            <span className="marquee-item">Carrier Authorized</span>
-            <span className="marquee-item">Rheem Pro Partner</span>
-            <span className="marquee-item">Lennox Premier</span>
-            <span className="marquee-item">Bosch Certified</span>
-            <span className="marquee-item">Trane Comfort Specialist</span>
+        {/* CERTIFIED BRAND PARTNERS (STATIONARY LUXURY TRUST BAR) */}
+        <section className="brand-trust-section">
+          <div className="container">
+            <div className="brand-trust-inner">
+              <span className="brand-trust-label">Certified & Authorized Partner</span>
+              <div className="brand-trust-grid">
+                <div className="brand-trust-item">
+                  <span className="brand-name">Carrier</span>
+                  <span className="brand-tier">Authorized</span>
+                </div>
+                <div className="brand-trust-item">
+                  <span className="brand-name">Trane</span>
+                  <span className="brand-tier">Specialist</span>
+                </div>
+                <div className="brand-trust-item">
+                  <span className="brand-name">Bosch</span>
+                  <span className="brand-tier">Certified Pro</span>
+                </div>
+                <div className="brand-trust-item">
+                  <span className="brand-name">Rheem</span>
+                  <span className="brand-tier">Pro Partner</span>
+                </div>
+                <div className="brand-trust-item">
+                  <span className="brand-name">Lennox</span>
+                  <span className="brand-tier">Premier</span>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
