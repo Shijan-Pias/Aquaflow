@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useRef, Suspense, lazy } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { siteData } from './data/siteData';
 import { SEO } from './components/SEO';
-
-const ContactSection = lazy(() => import('./components/ContactSection'));
+import ContactSection from './components/ContactSection';
 
 const Counter = ({ end, suffix = "" }) => {
   return <h3>{typeof end === 'number' ? end.toLocaleString() : end}{suffix}</h3>;
@@ -46,25 +45,37 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  const observerRef = useRef(null);
+
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
+    observerRef.current = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
+          observerRef.current?.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+    }, { threshold: 0.08, rootMargin: "0px 0px -20px 0px" });
+    
+    // Query all reveal elements and observe them
+    const elements = document.querySelectorAll('.reveal');
+    elements.forEach(el => observerRef.current.observe(el));
     
     revealRefs.current.forEach(ref => {
-      if (ref) observer.observe(ref);
+      if (ref) observerRef.current.observe(ref);
     });
     
-    return () => observer.disconnect();
+    return () => observerRef.current?.disconnect();
   }, []);
 
   const addToRefs = (el) => {
-    if (el && !revealRefs.current.includes(el)) {
-      revealRefs.current.push(el);
+    if (el) {
+      if (observerRef.current) {
+        observerRef.current.observe(el);
+      }
+      if (!revealRefs.current.includes(el)) {
+        revealRefs.current.push(el);
+      }
     }
   };
 
@@ -84,6 +95,11 @@ function App() {
   }, []);
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
+
+  const scrollToTop = (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <>
@@ -313,7 +329,8 @@ function App() {
                 />
               </div>
               
-              <div className="bento-card reveal delay-200" ref={addToRefs}>
+              {/* Plumbing Repairs */}
+              <div className="bento-card bento-with-media reveal delay-200" ref={addToRefs}>
                 <div className="bento-content">
                   <div className="bento-icon" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
@@ -321,9 +338,21 @@ function App() {
                   <h3>Plumbing Repairs</h3>
                   <p>From stubborn clogs and leaky pipes to full repiping and fixture installations.</p>
                 </div>
+                <div className="bento-card-media" aria-hidden="true">
+                  <img
+                    className="bento-card-img"
+                    src="/services/plumbing_repairs.jpg"
+                    alt="Plumbing repairs and pipe maintenance"
+                    width="400"
+                    height="300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
               </div>
               
-              <div className="bento-card reveal delay-300" ref={addToRefs}>
+              {/* AC & Cooling */}
+              <div className="bento-card bento-with-media reveal delay-300" ref={addToRefs}>
                 <div className="bento-content">
                   <div className="bento-icon" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
@@ -331,9 +360,21 @@ function App() {
                   <h3>AC & Cooling</h3>
                   <p>Keep the heat out with next-generation cooling systems and hyper-efficient tune-ups.</p>
                 </div>
+                <div className="bento-card-media" aria-hidden="true">
+                  <img
+                    className="bento-card-img"
+                    src="/services/ac_cooling.jpg"
+                    alt="AC & cooling maintenance with diagnostic gauges"
+                    width="400"
+                    height="300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
               </div>
 
-              <div className="bento-card reveal delay-100" ref={addToRefs}>
+              {/* Heating & Furnaces */}
+              <div className="bento-card bento-with-media reveal delay-100" ref={addToRefs}>
                 <div className="bento-content">
                   <div className="bento-icon" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path><path d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path></svg>
@@ -341,15 +382,38 @@ function App() {
                   <h3>Heating & Furnaces</h3>
                   <p>Stay warm all winter. Expert furnace diagnostics, repairs, and smart-home integrations.</p>
                 </div>
+                <div className="bento-card-media" aria-hidden="true">
+                  <img
+                    className="bento-card-img"
+                    src="/services/heating_furnaces.jpg"
+                    alt="Heating and furnace system maintenance"
+                    width="400"
+                    height="300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
               </div>
 
-              <div className="bento-card reveal delay-200" ref={addToRefs}>
+              {/* Water Heaters */}
+              <div className="bento-card bento-with-media reveal delay-200" ref={addToRefs}>
                 <div className="bento-content">
                   <div className="bento-icon" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                   </div>
                   <h3>Water Heaters</h3>
                   <p>Never run out of hot water again. Tankless upgrades and rapid replacements.</p>
+                </div>
+                <div className="bento-card-media" aria-hidden="true">
+                  <img
+                    className="bento-card-img"
+                    src="/services/water_heaters.jpg"
+                    alt="Tankless water heater installation"
+                    width="400"
+                    height="300"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
               </div>
             </div>
@@ -538,14 +602,8 @@ function App() {
           </div>
         </section>
 
-        {/* CONTACT & EMAILJS SYSTEM SECTION (LAZY LOADED) */}
-        <Suspense fallback={
-          <div className="section-loading-fallback" style={{ minHeight: '350px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span className="spinner-dot" style={{ borderColor: 'var(--color-teal)', borderTopColor: 'transparent', width: '28px', height: '28px' }}></span>
-          </div>
-        }>
-          <ContactSection addToRefs={addToRefs} />
-        </Suspense>
+        {/* CONTACT & EMAILJS SYSTEM SECTION */}
+        <ContactSection addToRefs={addToRefs} />
 
         {/* FINAL CTA */}
         <section className="final-cta reveal" ref={addToRefs}>
@@ -568,38 +626,149 @@ function App() {
         </section>
       </main>
 
-      {/* FOOTER */}
-      <footer className="footer">
+      {/* 2026 MODERN PREMIUM FOOTER */}
+      <footer className="footer-2026" role="contentinfo">
+        <div className="footer-ambient-glow" aria-hidden="true" />
+        
         <div className="container">
-          <div className="footer-grid">
-            <div className="footer-brand">
-              <a href="/" className="logo">
-                AquaFlow<span className="logo-dot">.</span>
+          {/* Top Dispatch & Quick Connect Banner */}
+          <div className="footer-top-strip">
+            <div className="footer-status-pill">
+              <span className="footer-pulse-dot" aria-hidden="true"></span>
+              <span className="footer-status-text">
+                <strong>24/7 Emergency Dispatch Active</strong> — Guaranteed Arrival in &lt;45 Mins
+              </span>
+            </div>
+
+            <div className="footer-top-actions">
+              <a href={siteData.header.phoneHref} className="footer-action-call" aria-label={`Call ${siteData.header.phoneNumber}`}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <span>Call {siteData.header.phoneNumber}</span>
               </a>
-              <p>Premium plumbing, heating, and cooling services delivered with next-generation technology and old-fashioned integrity.</p>
-            </div>
-            <div>
-              <h4>Services</h4>
-              <ul>
-                <li><a href="#services">Emergency Plumbing</a></li>
-                <li><a href="#services">AC Repair & Install</a></li>
-                <li><a href="#services">Furnace Solutions</a></li>
-                <li><a href="#services">Water Heaters</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4>Company</h4>
-              <ul>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#reviews">Reviews</a></li>
-                <li><a href="#contact">Contact</a></li>
-              </ul>
+
+              <a href={siteData.about.contact.whatsappHref} target="_blank" rel="noopener noreferrer" className="footer-action-whatsapp" aria-label="Chat on WhatsApp with Shijan Pias">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>WhatsApp</span>
+              </a>
             </div>
           </div>
-          <div className="footer-bottom">
-            <p>&copy; {CURRENT_YEAR} AquaFlow Home Services. All rights reserved.</p>
-            <p className="footer-demo-note">Demo website created for portfolio & presentation purposes. Not an official municipal dispatch.</p>
+
+          {/* Main 4-Column Grid */}
+          <div className="footer-main-grid">
+            {/* Col 1: Brand, Mission & Credentials */}
+            <div className="footer-col footer-col-brand">
+              <a href="/" className="footer-logo" aria-label="AquaFlow Home">
+                {siteData.header.brandName}<span className="logo-dot">.</span>
+              </a>
+              <p className="footer-brand-desc">
+                Licensed and insured master plumbing & HVAC craftsmanship. Built with transparent diagnostics, upfront guaranteed quotes, and 24/7 rapid dispatch.
+              </p>
+
+              <div className="footer-trust-chips">
+                <div className="footer-chip">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Licensed & Insured</span>
+                </div>
+                <div className="footer-chip">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <span>4.9★ (2,000+ Reviews)</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Col 2: Services */}
+            <div className="footer-col">
+              <h4 className="footer-col-title">Services</h4>
+              <ul className="footer-nav-list">
+                <li><a href="#services">Emergency Plumbing</a></li>
+                <li><a href="#services">AC Repair & Cooling</a></li>
+                <li><a href="#services">Heating & Furnaces</a></li>
+                <li><a href="#services">Tankless Water Heaters</a></li>
+                <li><a href="#services">Leak Diagnostics</a></li>
+                <li><a href="#services">Pipe Replacements</a></li>
+              </ul>
+            </div>
+
+            {/* Col 3: Company & Information */}
+            <div className="footer-col">
+              <h4 className="footer-col-title">Company</h4>
+              <ul className="footer-nav-list">
+                <li><a href="#about">About Shijan Pias</a></li>
+                <li><a href="#reviews">Verified Reviews</a></li>
+                <li><a href="#contact">Request Fast Quote</a></li>
+                <li><a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">Sitemap XML</a></li>
+                <li><a href="#about">Work Guarantee</a></li>
+              </ul>
+            </div>
+
+            {/* Col 4: Direct Contact & Availability */}
+            <div className="footer-col footer-col-contact">
+              <h4 className="footer-col-title">Direct Contact</h4>
+              <div className="footer-contact-items">
+                <a href={siteData.header.phoneHref} className="footer-contact-link">
+                  <span className="contact-icon-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  </span>
+                  <div>
+                    <span className="contact-small-label">24/7 Hotline</span>
+                    <span className="contact-main-val">{siteData.header.phoneNumber}</span>
+                  </div>
+                </a>
+
+                <a href={siteData.about.contact.emailHref} className="footer-contact-link">
+                  <span className="contact-icon-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  </span>
+                  <div>
+                    <span className="contact-small-label">Direct Email</span>
+                    <span className="contact-main-val">{siteData.about.contact.email}</span>
+                  </div>
+                </a>
+
+                <div className="footer-dispatch-time">
+                  <span className="dispatch-badge">Avg Arrival</span>
+                  <span>Within 45 Minutes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar: Legal, Rights, & Back to Top */}
+          <div className="footer-bottom-bar">
+            <div className="footer-bottom-left">
+              <p className="footer-copyright">
+                &copy; {CURRENT_YEAR} {siteData.meta.businessName}. All rights reserved.
+              </p>
+              <p className="footer-portfolio-badge">
+                Crafted for portfolio & service presentation.
+              </p>
+            </div>
+
+            <div className="footer-bottom-right">
+              <nav className="footer-legal-links" aria-label="Legal links">
+                <a href="#about">Privacy</a>
+                <span className="legal-sep" aria-hidden="true">•</span>
+                <a href="#about">Terms</a>
+                <span className="legal-sep" aria-hidden="true">•</span>
+                <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">Sitemap</a>
+              </nav>
+
+              <button
+                type="button"
+                onClick={scrollToTop}
+                className="btn-back-to-top"
+                aria-label="Back to top"
+              >
+                <span>Back to Top</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </footer>

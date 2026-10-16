@@ -45,8 +45,8 @@ export const siteData = {
   // To swap the background photo, update `backgroundImage` below with any local path
   // (e.g. '/images/shijan.jpg') or any Unsplash image URL.
   hero: {
-    // Current photo: Friendly professional technician in navy uniform with tools and pipes
-    backgroundImage: "/images/shijan.jpg",
+    // Current photo: Friendly professional technician in navy uniform inside modern plumbing workshop showroom
+    backgroundImage: "/images/hero-workshop.jpg",
     
     // Alternative high-res Unsplash photo options if you want to switch anytime:
     // "https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=1920&q=85"

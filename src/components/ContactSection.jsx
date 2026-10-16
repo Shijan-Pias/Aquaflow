@@ -104,7 +104,7 @@ export const ContactSection = ({ addToRefs }) => {
   return (
     <section id="contact" className="section contact-section">
       {/* Anchor for quote button scrolling */}
-      <div id="quote" style={{ position: 'relative', top: '-80px', visibility: 'hidden' }} />
+      <div id="quote" style={{ position: 'absolute', top: 0, left: 0 }} aria-hidden="true" />
 
       <div className="container">
         <div className="section-header reveal" ref={addToRefs}>
