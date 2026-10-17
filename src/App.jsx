@@ -256,46 +256,12 @@ function App() {
               </a>
             </div>
 
-            <div className="hero-trust-row">
-              <div className="hero-trust-stars" aria-label="5 star rating">
-                {'★★★★★'.split('').map((star, i) => (
-                  <span key={i} className="star">{star}</span>
-                ))}
-              </div>
-              <span className="hero-trust-rating">{siteData.hero.trust.rating} {siteData.hero.trust.reviewsCount}</span>
+            <div className="hero-trust-row" aria-label="Licensed & Insured, Upfront Pricing, 24/7 Emergency">
+              <span className="hero-trust-item">Licensed &amp; Insured</span>
               <span className="hero-trust-separator" aria-hidden="true">•</span>
-              <span className="hero-trust-badge">{siteData.hero.trust.badgeText}</span>
-            </div>
-          </div>
-        </section>
-
-        {/* CERTIFIED BRAND PARTNERS (STATIONARY LUXURY TRUST BAR) */}
-        <section className="brand-trust-section" aria-label="Certified Brand Partners">
-          <div className="container">
-            <div className="brand-trust-inner">
-              <span className="brand-trust-label">Certified & Authorized Partner</span>
-              <div className="brand-trust-grid">
-                <div className="brand-trust-item">
-                  <span className="brand-name">Carrier</span>
-                  <span className="brand-tier">Authorized</span>
-                </div>
-                <div className="brand-trust-item">
-                  <span className="brand-name">Trane</span>
-                  <span className="brand-tier">Specialist</span>
-                </div>
-                <div className="brand-trust-item">
-                  <span className="brand-name">Bosch</span>
-                  <span className="brand-tier">Certified Pro</span>
-                </div>
-                <div className="brand-trust-item">
-                  <span className="brand-name">Rheem</span>
-                  <span className="brand-tier">Pro Partner</span>
-                </div>
-                <div className="brand-trust-item">
-                  <span className="brand-name">Lennox</span>
-                  <span className="brand-tier">Premier</span>
-                </div>
-              </div>
+              <span className="hero-trust-item">Upfront Pricing</span>
+              <span className="hero-trust-separator" aria-hidden="true">•</span>
+              <span className="hero-trust-item">24/7 Emergency</span>
             </div>
           </div>
         </section>
@@ -310,110 +276,122 @@ function App() {
             </div>
             
             <div className="bento-grid">
+              {/* 24/7 Emergency Services - Photo Fills Card with Dark Teal Bottom Gradient */}
               <div className="bento-card bento-featured reveal delay-100" ref={addToRefs}>
-                <div className="bento-content">
-                  <div className="bento-icon" style={{background: 'rgba(255,255,255,0.1)', color: '#fff'}} aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                  </div>
-                  <h3>24/7 Emergency Services</h3>
-                  <p>Disasters don't wait for business hours. Our rapid-response teams are stationed across the city, guaranteeing arrival within 45 minutes for critical emergencies.</p>
-                </div>
                 <img
-                  className="bento-featured-img"
-                  src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=80"
-                  alt="Emergency plumbing technician fixing industrial pipeline"
-                  width="600"
-                  height="400"
+                  className="bento-featured-bg-img"
+                  src="/services/emergency-pipe-burst.jpg"
+                  alt="Plumber repairing a burst copper water pipe in an emergency"
+                  width="800"
+                  height="600"
                   loading="lazy"
                   decoding="async"
                 />
+                <div className="bento-featured-gradient" aria-hidden="true"></div>
+                <div className="bento-featured-body">
+                  <div className="bento-icon bento-featured-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  </div>
+                  <div className="bento-featured-text">
+                    <h3>24/7 Emergency Services</h3>
+                    <p>Disasters don't wait for business hours. Our rapid-response teams are stationed across the city, guaranteeing arrival within 45 minutes for critical emergencies.</p>
+                  </div>
+                </div>
               </div>
               
-              {/* Plumbing Repairs */}
-              <div className="bento-card bento-with-media reveal delay-200" ref={addToRefs}>
-                <div className="bento-content">
-                  <div className="bento-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                  </div>
-                  <h3>Plumbing Repairs</h3>
-                  <p>From stubborn clogs and leaky pipes to full repiping and fixture installations.</p>
-                </div>
-                <div className="bento-card-media" aria-hidden="true">
+              {/* Plumbing Repairs - Image Top, Text Below */}
+              <div className="bento-card bento-standard reveal delay-200" ref={addToRefs}>
+                <div className="bento-card-media">
                   <img
                     className="bento-card-img"
                     src="/services/plumbing_repairs.jpg"
                     alt="Plumbing repairs and pipe maintenance"
                     width="400"
-                    height="300"
+                    height="240"
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
+                <div className="bento-card-body">
+                  <div className="bento-card-header">
+                    <div className="bento-icon" aria-hidden="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    </div>
+                    <h3>Plumbing Repairs</h3>
+                  </div>
+                  <p>From stubborn clogs and leaky pipes to full repiping and fixture installations.</p>
+                </div>
               </div>
               
-              {/* AC & Cooling */}
-              <div className="bento-card bento-with-media reveal delay-300" ref={addToRefs}>
-                <div className="bento-content">
-                  <div className="bento-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
-                  </div>
-                  <h3>AC & Cooling</h3>
-                  <p>Keep the heat out with next-generation cooling systems and hyper-efficient tune-ups.</p>
-                </div>
-                <div className="bento-card-media" aria-hidden="true">
+              {/* AC & Cooling - Image Top, Text Below */}
+              <div className="bento-card bento-standard reveal delay-300" ref={addToRefs}>
+                <div className="bento-card-media">
                   <img
                     className="bento-card-img"
                     src="/services/ac_cooling.jpg"
                     alt="AC & cooling maintenance with diagnostic gauges"
                     width="400"
-                    height="300"
+                    height="240"
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
+                <div className="bento-card-body">
+                  <div className="bento-card-header">
+                    <div className="bento-icon" aria-hidden="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
+                    </div>
+                    <h3>AC & Cooling</h3>
+                  </div>
+                  <p>Keep the heat out with next-generation cooling systems and hyper-efficient tune-ups.</p>
+                </div>
               </div>
 
-              {/* Heating & Furnaces */}
-              <div className="bento-card bento-with-media reveal delay-100" ref={addToRefs}>
-                <div className="bento-content">
-                  <div className="bento-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path><path d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path></svg>
-                  </div>
-                  <h3>Heating & Furnaces</h3>
-                  <p>Stay warm all winter. Expert furnace diagnostics, repairs, and smart-home integrations.</p>
-                </div>
-                <div className="bento-card-media" aria-hidden="true">
+              {/* Heating & Furnaces - Image Top, Text Below */}
+              <div className="bento-card bento-standard reveal delay-100" ref={addToRefs}>
+                <div className="bento-card-media">
                   <img
                     className="bento-card-img"
                     src="/services/heating_furnaces.jpg"
                     alt="Heating and furnace system maintenance"
                     width="400"
-                    height="300"
+                    height="240"
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
+                <div className="bento-card-body">
+                  <div className="bento-card-header">
+                    <div className="bento-icon" aria-hidden="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path><path d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path></svg>
+                    </div>
+                    <h3>Heating & Furnaces</h3>
+                  </div>
+                  <p>Stay warm all winter. Expert furnace diagnostics, repairs, and smart-home integrations.</p>
+                </div>
               </div>
 
-              {/* Water Heaters */}
-              <div className="bento-card bento-with-media reveal delay-200" ref={addToRefs}>
-                <div className="bento-content">
-                  <div className="bento-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                  </div>
-                  <h3>Water Heaters</h3>
-                  <p>Never run out of hot water again. Tankless upgrades and rapid replacements.</p>
-                </div>
-                <div className="bento-card-media" aria-hidden="true">
+              {/* Water Heaters - Image Top, Text Below */}
+              <div className="bento-card bento-standard reveal delay-200" ref={addToRefs}>
+                <div className="bento-card-media">
                   <img
                     className="bento-card-img"
                     src="/services/water_heaters.jpg"
                     alt="Tankless water heater installation"
                     width="400"
-                    height="300"
+                    height="240"
                     loading="lazy"
                     decoding="async"
                   />
+                </div>
+                <div className="bento-card-body">
+                  <div className="bento-card-header">
+                    <div className="bento-icon" aria-hidden="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3>Water Heaters</h3>
+                  </div>
+                  <p>Never run out of hot water again. Tankless upgrades and rapid replacements.</p>
                 </div>
               </div>
             </div>
@@ -475,7 +453,7 @@ function App() {
                       </svg>
                       {siteData.about.contact.emailLabel}
                     </a>
-                    <a href={siteData.about.contact.whatsappHref} target="_blank" rel="noopener noreferrer" className="btn-about-whatsapp" aria-label="Chat with Shijan Pias on WhatsApp">
+                    <a href={siteData.about.contact.whatsappHref} target="_blank" rel="noopener noreferrer" className="btn-about-whatsapp" aria-label="Chat on WhatsApp">
                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                         <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                       </svg>
@@ -648,7 +626,7 @@ function App() {
                 <span>Call {siteData.header.phoneNumber}</span>
               </a>
 
-              <a href={siteData.about.contact.whatsappHref} target="_blank" rel="noopener noreferrer" className="footer-action-whatsapp" aria-label="Chat on WhatsApp with Shijan Pias">
+              <a href={siteData.about.contact.whatsappHref} target="_blank" rel="noopener noreferrer" className="footer-action-whatsapp" aria-label="Chat on WhatsApp">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                 </svg>
@@ -671,11 +649,15 @@ function App() {
               <div className="footer-trust-chips">
                 <div className="footer-chip">
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Licensed & Insured</span>
+                  <span>Licensed &amp; Insured</span>
                 </div>
                 <div className="footer-chip">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                  <span>4.9★ (2,000+ Reviews)</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Upfront Pricing</span>
+                </div>
+                <div className="footer-chip">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>24/7 Emergency</span>
                 </div>
               </div>
             </div>
@@ -697,7 +679,7 @@ function App() {
             <div className="footer-col">
               <h4 className="footer-col-title">Company</h4>
               <ul className="footer-nav-list">
-                <li><a href="#about">About Shijan Pias</a></li>
+                <li><a href="#about">About Us</a></li>
                 <li><a href="#reviews">Verified Reviews</a></li>
                 <li><a href="#contact">Request Fast Quote</a></li>
                 <li><a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">Sitemap XML</a></li>

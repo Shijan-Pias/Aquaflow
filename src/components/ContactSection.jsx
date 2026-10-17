@@ -72,13 +72,13 @@ export const ContactSection = ({ addToRefs }) => {
         phone: formData.phone || 'Not provided',
         service_type: formData.service,
         message: formData.message,
-        to_email: siteData.emailjs.recipientEmail || 'shijanpias3@gmail.com'
+        to_email: siteData.emailjs.recipientEmail || ''
       };
 
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
       setStatus('success');
-      setFeedbackMsg(`Thank you, ${formData.name}! Your message has been sent directly to ${siteData.emailjs.recipientEmail}. We will get back to you shortly.`);
+      setFeedbackMsg(`Thank you, ${formData.name}! Your message has been sent securely to our team. We will get back to you shortly.`);
       setFormData({
         name: '',
         email: '',
@@ -90,7 +90,7 @@ export const ContactSection = ({ addToRefs }) => {
       console.error('EmailJS Send Error:', err);
       setStatus('error');
       setFeedbackMsg(
-        `Failed to send via EmailJS: ${err?.text || err?.message || 'Check your EmailJS credentials'}. You can email directly to ${siteData.emailjs.recipientEmail}.`
+        `Failed to send your message: ${err?.text || err?.message || 'Check your EmailJS credentials'}. Please try again or email us directly.`
       );
     }
   };
@@ -123,7 +123,7 @@ export const ContactSection = ({ addToRefs }) => {
               </div>
               <h3>Need Immediate Help?</h3>
               <p>
-                Whether it's an urgent pipe burst, furnace breakdown, or a scheduled installation, Shijan Pias and the team are available 24/7.
+                Whether it's an urgent pipe burst, furnace breakdown, or a scheduled installation, our team is available 24/7.
               </p>
             </div>
 
@@ -161,7 +161,7 @@ export const ContactSection = ({ addToRefs }) => {
                 </div>
                 <div className="method-text">
                   <span className="method-label">WhatsApp Quick Chat</span>
-                  <span className="method-val">Chat Directly with Shijan</span>
+                  <span className="method-val">Chat Directly with Us</span>
                 </div>
               </a>
             </div>
@@ -173,7 +173,7 @@ export const ContactSection = ({ addToRefs }) => {
               </div>
               <div className="guarantee-chip">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>30-minute rapid response guarantee</span>
+                <span>24/7 Emergency dispatch available</span>
               </div>
             </div>
           </div>
@@ -183,7 +183,7 @@ export const ContactSection = ({ addToRefs }) => {
             <form onSubmit={handleSubmit} className="contact-form" noValidate>
               <div className="form-card-header">
                 <h4>Send a Direct Message</h4>
-                <p>Delivers directly to {siteData.emailjs.recipientEmail}</p>
+                <p>Sent securely to our team</p>
               </div>
 
               {/* Status alerts */}
@@ -328,7 +328,7 @@ export const ContactSection = ({ addToRefs }) => {
                 {status === 'loading' ? (
                   <>
                     <span className="spinner-dot"></span>
-                    <span>Sending to {siteData.emailjs.recipientEmail}...</span>
+                    <span>Sending securely...</span>
                   </>
                 ) : (
                   <>
@@ -343,7 +343,7 @@ export const ContactSection = ({ addToRefs }) => {
 
               <div className="form-footnote">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <span>Sent directly via EmailJS to <strong>{siteData.emailjs.recipientEmail}</strong>. 100% private.</span>
+                <span>Sent securely to our team. 100% private.</span>
               </div>
             </form>
           </div>

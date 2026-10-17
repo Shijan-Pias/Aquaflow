@@ -36,8 +36,8 @@ export const siteData = {
       { label: "About", href: "#about" },
       { label: "Contact", href: "#contact" }
     ],
-    phoneNumber: "1-800-123-4567",
-    phoneHref: "tel:18001234567",
+    phoneNumber: "+1 (800) 123-4567",
+    phoneHref: "tel:+18001234567",
     ctaText: "Call Now"
   },
 
@@ -61,13 +61,9 @@ export const siteData = {
     },
     secondaryButton: {
       text: "Call 24/7",
-      href: "tel:18001234567"
+      href: "tel:+18001234567"
     },
-    trust: {
-      rating: "4.9",
-      reviewsCount: "from 2,000+ reviews",
-      badgeText: "Licensed & Insured"
-    }
+    trustPill: "Licensed & Insured • Upfront Pricing • 24/7 Emergency"
   },
 
   // ABOUT SECTION CONFIGURATION
@@ -84,13 +80,13 @@ export const siteData = {
       { label: "24/7 Emergency", desc: "Immediate Dispatch" }
     ],
     contact: {
-      email: "shijanpias3@gmail.com",
-      emailHref: "mailto:shijanpias3@gmail.com",
-      phone: "+880 1648-366406",
-      phoneHref: "tel:+8801648366406",
-      whatsappHref: "https://wa.me/8801648366406",
+      email: "hello@aquaflow-demo.com",
+      emailHref: "mailto:hello@aquaflow-demo.com",
+      phone: "+1 (800) 123-4567",
+      phoneHref: "tel:+18001234567",
+      whatsappHref: "#",
       whatsappLabel: "WhatsApp",
-      emailLabel: "Email Me"
+      emailLabel: "Email Us"
     }
   },
 
@@ -101,17 +97,17 @@ export const siteData = {
     serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || "",
     templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "",
     publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "",
-    recipientEmail: "shijanpias3@gmail.com"
+    recipientEmail: "hello@aquaflow-demo.com"
   },
 
   // CONTACT & QUOTE SECTION CONTENT
   contactSection: {
     tag: "Get In Touch",
     title: "Request a Fast Quote or Send a Message",
-    description: "Fill out the form below to connect directly with Shijan Pias. We usually respond within 15–30 minutes for all inquiries.",
-    phone: "+880 1648-366406",
-    phoneHref: "tel:+8801648366406",
-    whatsappHref: "https://wa.me/8801648366406",
+    description: "Fill out the form below to connect directly with our team. We respond promptly to all inquiries.",
+    phone: "+1 (800) 123-4567",
+    phoneHref: "tel:+18001234567",
+    whatsappHref: "#",
     servicesList: [
       "Emergency Plumbing",
       "AC & Cooling Repair",
